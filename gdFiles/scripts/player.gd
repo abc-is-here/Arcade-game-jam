@@ -15,6 +15,7 @@ const FOV_CHANGE = 1.5
 
 var gravity = 9.8
 
+
 @onready var head = $head
 @onready var camera = $head/Camera3D
 
@@ -42,7 +43,7 @@ func _physics_process(delta):
 	else:
 		speed = WALK_SPEED
 
-	var input_dir = Input.get_vector("left", "right", "up", "down")
+	var input_dir = Input.get_vector("right", "left", "down", "up")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if is_on_floor():
 		if direction:
