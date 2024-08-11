@@ -4,7 +4,7 @@ var speed
 const WALK_SPEED = 5.0
 const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 4.8
-const SENSITIVITY = 0.004
+var SENSITIVITY = 0.009
 
 const BOB_FREQ = 2.4
 const BOB_AMP = 0.08
@@ -22,9 +22,16 @@ var gravity = 9.8
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 
 
 func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		SENSITIVITY = 0.009
+	elif event.is_action_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		SENSITIVITY = 0.0
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
